@@ -1,0 +1,87 @@
+#modyfikacja pliku
+git add #dodanie do commita, git policzył obiekt
+#inna modyfikacja pliku
+git status #niezwykły status, git nie policzył obiektu dla zmian
+
+git commit -a -m "Opis commita" # -a dodaje do commita wszystkie pliki, które zostały wcześniej dodane do repo przez git add
+
+git commit --amend #commituje zmiany w ramach poprzedniego commita
+
+git reset plik.txt #cofnięcie git add
+
+git checkout -- plik.txt #confnięcie zmian, -- w celu odróżnienia od zmiany brancha
+
+################ tag ################
+
+git tag #wyświetla wszystkie tagi
+git tag UMnieDziala #taguje dany commit
+git tag -d UMnieDziala #usuwa dany tag
+git tag -a UMnieDziala -m "Tu jest opis taga UMnieDziala" #tag z wiadomością
+
+################ stash ################
+
+git stash list #stash - podręczny schowek, wyświetla stashe
+git stash #dodaje stasha, cofa zmiany w plikach, ale robi zmianę i zapisuje  w schowku (stashu)
+git stash apply #wyciąga zmiany ze schowka i aplikuje w danym pliku, z ostatnio używanego stasha
+git stash drop #usuwa ostatnio używanego stasha
+
+################ remote ################
+
+git init --bare #na repo z przełącznikiem --bare nie da się robić zmian, można tylko wypychać i ściągać zmiany
+git remote #sprawdzamy jakie mamy skonfigurowane zdalne repozytoria
+git remote add origin C:\Users\dell\git_nauka\level_B\remote\levelB #dodaje repozytorium zdalne o aliasie origin znajdujące się w określonej ścieżce
+git remote remove origin #usuwa zdalne repozytorium o aliasie origin
+
+################ branch ################
+
+git branch -v #wyświetla wszystkie branche
+git branch -r #wyświetla branche na repozytoriach zdalnych
+git branch NazwaBrancha #utworzenie nowego brancha o nazwie NazwaBrancha
+git branch -d NazwaBrancha #kasuje brancha
+
+################ push ################
+
+git push -u origin master #wypchnij lokalny branch o nazwie master do zdalnego repo z aliasem origin
+git push origin --delete QuickFix #kasuje brancha QuickFix ze zdalnego repo
+
+git clone C:\Users\dell\git_nauka\level_B\remote\levelB levelBprim #pobiera zawartości repozytorium zdalnego do katalogu levelBprim, użytkownik może zacząć prace na pobranym kodzie
+
+################ checkout ################
+
+git checkout NazwaBrancha #przełącznie na branch NazwaBrancha
+git checkout -b QuickFix #tworzy nowego brancha QuickFix i przełącza do niego
+git checkout QuickFix 2f53c40#tworzy brancha QuickFix od danego commita w masterze, 2f53c40 - hash commita z mastera
+
+################ merge ################
+
+git merge QuickFix #po przejściu do brancha master merguje zmiany z brancha QuickFix do master
+git merge --no-ff #no fast forward, git tworzy "po drodze" commit mergujacy
+
+################ diff ################
+
+git diff QuickFix #wyświetla zmiany między bieżącym branchem a branchem QuickFix
+git diff QuickFix -- src/main/ #jw. zmiany miedzy danym katalogiem
+
+################ fetch ################
+
+git fetch origin #pobranie zmian z serwera
+
+################ aliasy ################
+
+git config --global alias.st status #dodaje alias st pod status
+git config alias.st #wyświetla co podpięte jest pod alias st
+
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+
+git config --global alias.llog "log --pretty=format:'%C(yellow)%h %Cred%ad %Cblue%an%Cgreen%d %Creset%s' --date=iso" #z gitkurwa https://github.com/jakubnabrdalik/gitkurwa/blob/master/config
+
+################ github ################
+1. Dodanie klucza publicznego w settings do githuba
+2. Uwtorzenie repo na githubie
+3a. Jeśli repo istniało lokalnie:
+	git remote add origin https://github.com/tommyNy/esp-environment-wireless-meter.git
+	git push origin master
+3b. Jeśli nie istniało trzeba sklonować z githuba
